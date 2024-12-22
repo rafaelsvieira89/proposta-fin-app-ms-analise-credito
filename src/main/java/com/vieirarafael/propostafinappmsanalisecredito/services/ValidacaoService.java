@@ -1,9 +1,11 @@
 package com.vieirarafael.propostafinappmsanalisecredito.services;
 
+import com.vieirarafael.propostafinappmsanalisecredito.config.RabbitExchangesProperties;
 import com.vieirarafael.propostafinappmsanalisecredito.domain.Proposta;
 import com.vieirarafael.propostafinappmsanalisecredito.validacao.RegraValidacao;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,6 +15,8 @@ import java.util.List;
 @Service
 public class ValidacaoService {
     private final List<RegraValidacao> regraValidacao;
+    private final NotificacaoRabbitService notificacaoRabbitService;
+    private RabbitExchangesProperties rabbitExchangesProperties;
 
     public void validarProposta(Proposta proposta) {
 
@@ -26,5 +30,6 @@ public class ValidacaoService {
                     .setObservacao(e.getMessage());
             log.error(e.getMessage());
         }
+        notificacaoRabbitService.notificar(rabbitExchangesProperties.getPropostaConcluida(), proposta);
     }
 }

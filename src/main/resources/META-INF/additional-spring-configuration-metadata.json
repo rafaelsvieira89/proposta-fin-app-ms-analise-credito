@@ -4,5 +4,10 @@
       "name": "rabbitmq.queue.proposta.pendente",
       "type": "java.lang.String",
       "description": "Description for rabbitmq.queue.proposta.pendente."
-  }
-] }
+    },
+    {
+      "name": "rabbitmq.exchanges.proposta-concluida",
+      "type": "java.lang.String",
+      "description": "Description for rabbitmq.exchanges.proposta-concluida."
+    }
+  ] }
