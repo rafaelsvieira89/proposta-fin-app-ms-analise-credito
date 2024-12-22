@@ -14,7 +14,6 @@ public class PropostaPendenteListener {
 
     private final ValidacaoService validacaoService;
 
-
     @RabbitListener(queues = "${rabbitmq.queue.proposta.pendente}")
     public void propostaPendente(Proposta proposta) {
         validacaoService.validarProposta(proposta);
