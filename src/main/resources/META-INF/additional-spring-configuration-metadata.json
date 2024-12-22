@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "rabbitmq.queue.proposta.pendente",
+      "type": "java.lang.String",
+      "description": "Description for rabbitmq.queue.proposta.pendente."
+  }
+] }

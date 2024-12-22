@@ -8,6 +8,10 @@ import org.springframework.stereotype.Component;
 public class RendaMaiorQueOValorSolicitadoImpl implements RegraValidacao {
     @Override
     public int validar(Proposta proposta) {
-        return 0;
+        return validarRendaMaiorQueOValorSolicitado(proposta) ? 100 : 0;
+    }
+
+    private boolean validarRendaMaiorQueOValorSolicitado(Proposta proposta) {
+        return proposta.getValorSolicitado().compareTo(proposta.getUsuario().getRenda()) < 0;
     }
 }
