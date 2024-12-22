@@ -9,4 +9,4 @@ spring:
 rabbitmq:
   queue:
     proposta:
-      pendente: proposta-pendente.ms-notificacao
+      pendente: proposta-pendente.ms-analise-credito

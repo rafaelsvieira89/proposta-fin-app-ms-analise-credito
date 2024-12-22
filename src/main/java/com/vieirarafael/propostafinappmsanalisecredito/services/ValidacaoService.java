@@ -7,6 +7,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+
 @Slf4j
 @AllArgsConstructor
 @Service
@@ -14,7 +15,16 @@ public class ValidacaoService {
     private final List<RegraValidacao> regraValidacao;
 
     public void validarProposta(Proposta proposta) {
-        var resultado = regraValidacao.stream().mapToInt(regra -> regra.validar(proposta)).sum();
-        log.info("Resultado: {}", resultado);
+
+        try {
+            var resultado = regraValidacao.stream().mapToInt(regra -> regra.validar(proposta)).sum();
+            var aprovada = resultado > 350;
+            proposta.setAprovada(aprovada);
+        } catch (StringIndexOutOfBoundsException e) {
+            proposta
+                    .setAprovada(false)
+                    .setObservacao(e.getMessage());
+            log.error(e.getMessage());
+        }
     }
 }
